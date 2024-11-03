@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.product;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ProductRepository extends CrudRepository<Product, Integer> {
@@ -11,4 +12,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     List<Product> findAll();
 
     Product save(Product p);
+
+    @Query("SELECT pt FROM ProductType pt")
+    List<ProductType> findAllProductTypes();
 }
