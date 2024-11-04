@@ -37,8 +37,9 @@ public class ProductService {
         return pr.findProductTypeByName(name);
     }
 
+    @Transactional(readOnly=true)
     public List<Product> getProductsCheaperThan(Integer value){
         // TODO: CHANGE TO SOLVE TEST 6!
-        return null;
+        return pr.findProductsCheaperThan(value);
     }
 }
