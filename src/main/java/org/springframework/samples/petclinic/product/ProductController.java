@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -36,6 +38,19 @@ public class ProductController {
             throw new ResourceNotFoundException("No se ha podido encontrar el producto con id: "+id);
         }
         return new ProductDTO(p);
+    }
+
+    @PutMapping("/{id}")
+    public void modifyProduct(@PathVariable("id") Integer id, @RequestBody @Valid ProductDTO p) throws UnfeasibleProductUpdate {
+        Product existingProduct = ps.getProductById(id);
+        if (existingProduct==null){
+            throw new ResourceNotFoundException("No se ha podido encontrar el producto con id: "+id);
+        }
+        existingProduct.setName(p.getName());
+        existingProduct.setPrice(p.getPrice());
+        ProductType pt = ps.getProductType(p.getType());
+        existingProduct.setType(pt);
+        ps.save(existingProduct);
     }
     
     
