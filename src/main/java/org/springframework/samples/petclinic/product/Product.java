@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.product;
 import org.springframework.samples.petclinic.model.BaseEntity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -24,7 +25,7 @@ public class Product extends BaseEntity {
     @Min(0)
     Integer price;
 
-    @Transient
+    @ManyToOne
     @NotNull
     ProductType type;
 }
