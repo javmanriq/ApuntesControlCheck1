@@ -3,8 +3,10 @@ package org.springframework.samples.petclinic.product;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class ProductService {
     ProductRepository pr;
 
@@ -29,9 +31,10 @@ public class ProductService {
         pr.save(p);
     }
 
+    @Transactional(readOnly=true)
     public ProductType getProductType(String name){
         // TODO: CHANGE TO SOLVE TEST 5!
-        return null;
+        return pr.findProductTypeByName(name);
     }
 
     public List<Product> getProductsCheaperThan(Integer value){

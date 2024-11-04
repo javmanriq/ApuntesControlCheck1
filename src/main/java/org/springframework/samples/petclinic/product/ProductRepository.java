@@ -15,4 +15,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     @Query("SELECT pt FROM ProductType pt")
     List<ProductType> findAllProductTypes();
+
+    @Query("SELECT pt FROM ProductType pt WHERE pt.name = ?1")
+    ProductType findProductTypeByName(String name);
 }
